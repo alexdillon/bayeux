@@ -46,13 +46,13 @@ namespace Bayeux.Internal
             }
         }
 
-        public async Task Subscribe(string channel)
+        public async Task Subscribe(string channel, Dictionary<string, object> extensions)
         {
             if (!_heartbeat.IsRunning)
             {
                 throw new InvalidOperationException("Not connected to server.");
             }
-            await _broker.SendSubscribe(channel);
+            await _broker.SendSubscribe(channel, extensions);
         }
     }
 }

@@ -30,9 +30,14 @@ namespace Bayeux.Sandbox
                 // Connect to server.
                 await client.Connect();
 
+                var extensions = new Dictionary<string, object>();
+                //extensions.Add("access_token", "abc123");
+                // Additional extensions can be added as needed
+
                 // Subscribe to channel.
                 await client.Subscribe("/test",
-                    message => Console.WriteLine("Message received: {0}", message.Channel));
+                    message => Console.WriteLine("Message received: {0}", message.Channel),
+                    extensions);
             }
         }
     }
