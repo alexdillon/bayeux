@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Bayeux.Internal;
 
 namespace Bayeux
@@ -26,9 +27,9 @@ namespace Bayeux
             Disconnect();
         }
 
-        public void Connect()
+        public async Task Connect()
         {
-            _connection.Connect();
+            await _connection.Connect();
             _router.Start();
         }
 
@@ -38,9 +39,9 @@ namespace Bayeux
             _router.Stop();
         }
 
-        public void Subscribe(string channel, Action<IBayeuxMessage> callback)
+        public async Task Subscribe(string channel, Action<IBayeuxMessage> callback)
         {
-            _connection.Subscribe(channel);
+            await _connection.Subscribe(channel);
             _router.Subscribe(channel, callback);
         }
     }

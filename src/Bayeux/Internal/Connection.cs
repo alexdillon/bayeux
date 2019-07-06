@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Bayeux.Diagnostics;
 
 namespace Bayeux.Internal
@@ -15,12 +16,12 @@ namespace Bayeux.Internal
             _heartbeat = new ConnectionHeartbeat(_broker, queue);
         }
 
-        public void Connect()
+        public async Task Connect()
         {
             if (!_heartbeat.IsRunning)
             {
                 // Send handshake to server.
-                var handshake = _broker.SendHandshake().Result;
+                var handshake = await _broker.SendHandshake();
                 if (handshake?.Response == null || !handshake.Response.Successful)
                 {
                     var message = $"Could not connect to server. {handshake?.Response?.Error}".Trim();
@@ -45,13 +46,13 @@ namespace Bayeux.Internal
             }
         }
 
-        public void Subscribe(string channel)
+        public async Task Subscribe(string channel)
         {
             if (!_heartbeat.IsRunning)
             {
                 throw new InvalidOperationException("Not connected to server.");
             }
-            _broker.SendSubscribe(channel).Wait();
+            await _broker.SendSubscribe(channel);
         }
     }
 }
