@@ -30,6 +30,11 @@ namespace Bayeux.Internal
             }
         }
 
+        public void ClearAllSubscriptions()
+        {
+            _callbacks.Clear();
+        }
+
         // ReSharper disable once FunctionNeverReturns
         protected override Task Run(CancellationToken token)
         {

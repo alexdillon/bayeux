@@ -16,6 +16,8 @@ namespace Bayeux.Internal
             _heartbeat = new ConnectionHeartbeat(_broker, queue);
         }
 
+        public bool IsHeartbeatRunning => this._heartbeat.IsRunning;
+
         public async Task Connect()
         {
             if (!_heartbeat.IsRunning)

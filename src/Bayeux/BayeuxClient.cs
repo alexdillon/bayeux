@@ -23,6 +23,8 @@ namespace Bayeux
             _router = new MessageRouter(queue);
         }
 
+        public bool IsHeartbeatConnected => this._connection.IsHeartbeatRunning;
+
         void IDisposable.Dispose()
         {
             Disconnect();
@@ -32,6 +34,7 @@ namespace Bayeux
         {
             await _connection.Connect();
             _router.Start();
+            _router.ClearAllSubscriptions();
         }
 
         public void Disconnect()
