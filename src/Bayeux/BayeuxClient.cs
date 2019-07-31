@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Bayeux.Internal;
 
 namespace Bayeux
@@ -21,15 +23,18 @@ namespace Bayeux
             _router = new MessageRouter(queue);
         }
 
+        public bool IsHeartbeatConnected => this._connection.IsHeartbeatRunning;
+
         void IDisposable.Dispose()
         {
             Disconnect();
         }
 
-        public void Connect()
+        public async Task Connect()
         {
-            _connection.Connect();
+            await _connection.Connect();
             _router.Start();
+            _router.ClearAllSubscriptions();
         }
 
         public void Disconnect()
@@ -38,9 +43,9 @@ namespace Bayeux
             _router.Stop();
         }
 
-        public void Subscribe(string channel, Action<IBayeuxMessage> callback)
+        public async Task Subscribe(string channel, Action<IBayeuxMessage> callback, Dictionary<string, object> extensions)
         {
-            _connection.Subscribe(channel);
+            await _connection.Subscribe(channel, extensions);
             _router.Subscribe(channel, callback);
         }
     }

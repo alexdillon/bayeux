@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bayeux.Internal
@@ -27,12 +28,13 @@ namespace Bayeux.Internal
             return await broker.Send(message, token);
         }
 
-        public static async Task<TransportResponse> SendSubscribe(this Broker broker, string channel)
+        public static async Task<TransportResponse> SendSubscribe(this Broker broker, string channel, Dictionary<string, object> extensions)
         {
             var message = new Message
             {
                 Channel = "/meta/subscribe",
-                Subscription = channel
+                Subscription = channel,
+                Extension = extensions,
             };
             return await broker.Send(message, CancellationToken.None);
         }

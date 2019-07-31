@@ -1,23 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Bayeux</AssemblyName>
     <RootNamespace>Bayeux</RootNamespace>
     <Version>1.0.0</Version>
-    <Authors>Patrik Svensson</Authors>
-    <Company>Spectre Systems</Company>
-    <Description>A .NET implementation of the Bayeux client protocol.</Description>
-    <RepositoryUrl>https://github.com/patriksvensson/bayeux</RepositoryUrl>
+    <Authors>Alex Dillon</Authors>
+    <Company>MicroCube Software</Company>
+    <Description>A .NET implementation of the Bayeux client protocol.
+Based on the version by Patrik Svensson</Description>
+    <RepositoryUrl>https://github.com/alexdillon/bayeux</RepositoryUrl>
     <PackageTags>Bayeux</PackageTags>
-    <PackageProjectUrl>https://github.com/patriksvensson/bayeux</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/patriksvensson/bayeux/blob/develop/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/alexdillon/bayeux</PackageProjectUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Bayeux2</PackageId>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.Console" Version="4.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Console">
-      <HintPath>..\..\..\..\..\..\Users\psn\.nuget\packages\system.console\4.3.0\ref\netstandard1.3\System.Console.dll</HintPath>
-    </Reference>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 </Project>
